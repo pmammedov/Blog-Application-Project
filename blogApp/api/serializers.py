@@ -5,6 +5,7 @@ from blogApp.models import BlogPost, Category, Comment, Like, View
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -30,8 +31,22 @@ class CommentSerializer(serializers.ModelSerializer):
         )
 
 
+class LikeSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    user_id = serializers.IntegerField()
+    class Meta:
+        model = Like
+        fields = (
+            "id",
+            "user",
+            "user_id",
+            "post"
+        )
+
+
 class BlogPostSerializer(serializers.ModelSerializer):
     post_comment = CommentSerializer(many=True, read_only=True)
+    post_like = LikeSerializer(many=True, read_only=True)
     # category = serializers.StringRelatedField()
     # category_id = serializers.IntegerField()
     like_count = serializers.SerializerMethodField()
@@ -55,7 +70,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
             "like_count",
             "comment_count",
             "post_view_count",
-            "post_comment"
+            "post_comment",
+            "post_like"
         )
         read_only_fields = (
             "published_date",
@@ -71,27 +87,6 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     def get_post_view_count(self, obj):
         return View.objects.filter(post=obj.id).count()
-
-
-class LikeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Like
-        fields = (
-            "id",
-            "user",
-            "post"
-        )
-
-
-class ViewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = View
-        fields = (
-            "id",
-            "post",
-            "user",
-            "view_time"
-        )
 
 
 class PostUserSerializer(serializers.ModelSerializer):
