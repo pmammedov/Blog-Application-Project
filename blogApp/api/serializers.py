@@ -2,7 +2,8 @@ from dataclasses import fields
 from rest_framework import serializers
 
 from blogApp.models import BlogPost, Category, Comment, Like, View
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,10 +15,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    # kimin yorum yaptığını belirtmek için ilave edildi
     user = serializers.StringRelatedField(read_only=True)
-    user_id = serializers.IntegerField(read_only=True)
-    # blog = serializers.StringRelatedField()
-    # blog_id = serializers.IntegerField()
+    # user_id = serializers.IntegerField(read_only=True)  # kimin yorum yaptığını belirtmek için ilave edildi
 
     class Meta:
         model = Comment
@@ -26,12 +26,8 @@ class CommentSerializer(serializers.ModelSerializer):
             "content",
             "time_stamp",
             "user",
-            "user_id",
+            # "user_id",
         )
-        # read_only_fields =(
-        #     "user",
-        #     "user_id"
-        # )
 
 
 class BlogPostSerializer(serializers.ModelSerializer):
@@ -86,12 +82,6 @@ class LikeSerializer(serializers.ModelSerializer):
             "post"
         )
 
-    # def create(self, validated_data):
-    #     print(self.context['request'].user)
-    #     if validated_data['user'] == self.context['request'].user:
-    #         print(validated_data)
-    #         return super().create(validated_data)
-
 
 class ViewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -101,4 +91,20 @@ class ViewSerializer(serializers.ModelSerializer):
             "post",
             "user",
             "view_time"
+        )
+
+
+class PostUserSerializer(serializers.ModelSerializer):
+    # user_posts = serializers.SerializerMetaclass(BlogPost,)
+    # user_posts = BlogPostSerializer(many=True, read_only=True)
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "profile_pic",
+            "biography",
+            # "user_posts"
         )
