@@ -37,6 +37,9 @@ class BlogPostView(generics.ListCreateAPIView):
     pagination_class = CustomLimitOffsetPagination
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = BlogPost.objects.all()
@@ -72,11 +75,32 @@ class LikeView(generics.ListCreateAPIView):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
 
+    # def create(self, request, *args, **kwargs):
+    #     user = request.data.get('user')
+    #     slug = self.kwargs.get('slug')
+    #     serializer = self.get_serializer(data=request.data)
+    #     exists_like = Like.objects.filter(user=user, post=post)
+    #     serializer.is_valid(raise_exception=True)
+    #     post = get_object_or_404(BlogPost, slug=slug)
+    #     if exists_like:
+    #         exists_like.delete()
+    #     else:
+    #         serializer.save(user=user, post=post)
+    #     headers = self.get_success_headers(serializer.data)
+    #     return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    # def perform_create(self, serializer):
+    #     slug = self.kwargs.get('slug')
+    #     user = request.data.get('user')
+    #     post = get_object_or_404(BlogPost, slug=slug)
+    #     serializer.save()
+    #     return super().perform_create(serializer)
+
     def create(self, request, *args, **kwargs):
-        user = request.data.get('user')
+        user = request.data.get('user_id')
         post = request.data.get('post')
         serializer = self.get_serializer(data=request.data)
-        exists_like = Like.objects.filter(user=user, post=post)
+        exists_like = Like.objects.filter(user_id=user, post=post)
         serializer.is_valid(raise_exception=True)
         if exists_like:
             exists_like.delete()
@@ -84,6 +108,7 @@ class LikeView(generics.ListCreateAPIView):
             self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
 
 class PostUserView(generics.ListAPIView):
     queryset = User.objects.all()

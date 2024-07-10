@@ -34,6 +34,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField()
     user_id = serializers.IntegerField()
+
     class Meta:
         model = Like
         fields = (
@@ -47,8 +48,8 @@ class LikeSerializer(serializers.ModelSerializer):
 class BlogPostSerializer(serializers.ModelSerializer):
     post_comment = CommentSerializer(many=True, read_only=True)
     post_like = LikeSerializer(many=True, read_only=True)
-    # category = serializers.StringRelatedField()
-    # category_id = serializers.IntegerField()
+    author = serializers.StringRelatedField(read_only=True)
+    author_id = serializers.IntegerField(read_only=True)
     like_count = serializers.SerializerMethodField()
     comment_count = serializers.SerializerMethodField()
     post_view_count = serializers.SerializerMethodField()
@@ -59,8 +60,8 @@ class BlogPostSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "author",
+            "author_id",
             "category",
-            # "category_id",
             "content",
             "image",
             "published_date",
