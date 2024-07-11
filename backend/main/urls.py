@@ -24,12 +24,11 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="BlogApp API",
+        title="Blog Application API",
         default_version="v1",
-        description="Blog Aplications API project provides blog post info",
+        description="Blog Aplications Project",
         terms_of_service="#",
-        # Change e-mail on this line!
-        contact=openapi.Contact(email="fthgnydn34@gmail.com"),
+        contact=openapi.Contact(email="pmammedov@gmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,

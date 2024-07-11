@@ -4,7 +4,6 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
-# User = settings.AUTH_USER_MODEL
 User = get_user_model()
 
 

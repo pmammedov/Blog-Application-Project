@@ -16,9 +16,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    # kimin yorum yaptığını belirtmek için ilave edildi
     user = serializers.StringRelatedField(read_only=True)
-    # user_id = serializers.IntegerField(read_only=True)  # kimin yorum yaptığını belirtmek için ilave edildi
 
     class Meta:
         model = Comment
@@ -27,7 +25,6 @@ class CommentSerializer(serializers.ModelSerializer):
             "content",
             "time_stamp",
             "user",
-            # "user_id",
         )
 
 
@@ -91,7 +88,6 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
 
 class PostUserSerializer(serializers.ModelSerializer):
-    # user_posts = BlogPostSerializer(many=True, read_only=True)
     class Meta:
         model = User
         fields = (
@@ -102,5 +98,4 @@ class PostUserSerializer(serializers.ModelSerializer):
             "email",
             "profile_pic",
             "biography",
-            # "user_posts"
         )

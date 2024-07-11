@@ -22,7 +22,6 @@ from rest_framework import permissions
 from .pagination import CustomLimitOffsetPagination
 from .permissions import IsPostOwnerOrReadOnly, IsAdminUserOrReadOnly
 from django.contrib.auth import get_user_model
-# User = settings.AUTH_USER_MODEL
 User = get_user_model()
 
 
@@ -62,7 +61,6 @@ class BlogPostDetailView(generics.RetrieveUpdateDestroyAPIView):
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
-        # View.objects.get_or_create(user=request.user, post=instance)
         View.objects.create(user=request.user, post=instance)
         return Response(serializer.data)
 
