@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import { BlogDataContext } from '../../context/BlogContext';
 
-const BlogForm = ({ handleChange, handleSubmit, posts }) => {
+const BlogForm = ({ handleChange, handleSubmit, posts, buttonInnerText }) => {
+    const { category, loadingCategory } = useContext(BlogDataContext)
+
+    if (loadingCategory) {
+        return (
+            <p>Loading...</p>
+        )
+    }
     return (
-        <form
-            onSubmit={handleSubmit}
-        >
+        <form onSubmit={(e) => handleSubmit(e)}>
             <Stack spacing={3} direction='column' >
                 <TextField
                     label='Title'
@@ -15,34 +21,36 @@ const BlogForm = ({ handleChange, handleSubmit, posts }) => {
                     value={posts.title}
                     id="outlined-size-normal"
                     required
-                    onChange={(e) => handleChange(e)}
+                    onChange={handleChange}
                 />
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
                     <InputLabel id="demo-simple-select-helper-label">Categories</InputLabel>
                     <Select
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
+                        // value={posts.category}
+                        name='category'
+                        defaultValue=""
                         value={posts.category}
-                        label="Age"
+                        label="Categories"
+                        required
                         onChange={handleChange}
                     >
                         <MenuItem value="">
                             <em>Categories</em>
                         </MenuItem>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        {category?.map((item, index) => (
+                            <MenuItem key={index} value={item.id}>{item.name}</MenuItem>
+                        ))}
                     </Select>
-                    {/* <FormHelperText>With label + helper text</FormHelperText> */}
                 </FormControl>
                 <TextField
                     label='Image URL'
                     type='url'
-                    name='imageUrl'
+                    name='image'
                     value={posts.image}
                     id="outlined-size-normal"
                     onChange={handleChange}
-                    // onChange={handleChange} same with above
                     required
                 />
                 <TextField
@@ -50,16 +58,20 @@ const BlogForm = ({ handleChange, handleSubmit, posts }) => {
                     name='content'
                     value={posts.content}
                     multiline
-                    rows={12}
+                    rows={6}
                     maxRows={18}
+                    required
                     onChange={handleChange}
                 />
                 <FormControl sx={{ m: 1, minWidth: 120 }}>
-                    <InputLabel id="demo-simple-select-helper-label">Status</InputLabel>
+                    <InputLabel id="status">Status</InputLabel>
                     <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
+                        labelId="status"
+                        id="status"
+                        name='status'
                         value={posts.status}
+                        defaultValue=""
+                        // value={posts.status}
                         label="Status"
                         required
                         onChange={handleChange}
@@ -67,15 +79,15 @@ const BlogForm = ({ handleChange, handleSubmit, posts }) => {
                         <MenuItem value="">
                             <em>Status</em>
                         </MenuItem>
-                        <MenuItem value={"d"}>Draft</MenuItem>
-                        <MenuItem value={"p"}>Published</MenuItem>
+                        <MenuItem value="d">Draft</MenuItem>
+                        <MenuItem value="p">Published</MenuItem>
                     </Select>
                 </FormControl>
                 <Button
                     variant='contained'
                     type='submit'
                     value='submit'
-                >Submit</Button>
+                >{buttonInnerText}</Button>
             </Stack>
         </form>
     )

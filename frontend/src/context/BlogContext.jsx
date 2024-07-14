@@ -1,98 +1,208 @@
 import axios from 'axios'
 import React, { createContext, useState } from 'react'
 import { toastErrorNotify, toastSuccessNotify } from '../helper/helper';
+// import { AuthContextProv } from './AuthContext';
 
 
 export const BlogDataContext = createContext()
-
-const url = "http://127.0.0.1:8000/"
+const url = "http://127.0.0.1:8000/";
 
 const BlogContext = ({ children }) => {
-    // const [posts, setPosts] = useState(JSON.parse(sessionStorage.getItem("posts")) || initialValue)
-    const [posts, setPosts] = useState(JSON.parse(sessionStorage.getItem("posts")) || [])
-    const [category, setCategory] = useState(JSON.parse(sessionStorage.getItem("categories")) || "")
+    const [blogPosts, setBlogposts] = useState([]);  //* for home  page
+    const [blogDetail, setBlogDetail] = useState([]); //* for blogDetail page
+    const [category, setCategory] = useState([]);
+    const [deatilLoading, setDeatilLoading] = useState(true); //* for blogDetail page
+    const [loadingCategory, setLoadingCategory] = useState(true);
+    const [userPosts, setUserPosts] = useState([])
+    const [page, setPage] = useState(6);
+    // const { currentUser } = useContext(AuthContextProv)
 
     const getCategories = async () => {
         try {
-            const res = await axios.get(`${url}blog/category/`)
-            setCategory(res.data)
-            sessionStorage.setItem("categories", JSON.stringify(res.data))
-            console.log(category)
+            const res = await axios.get(`${url}blog/category/`);
+            setCategory(res.data);
+            sessionStorage.setItem("categories", JSON.stringify(res.data));
+            // console.log(category)
+            setLoadingCategory(false);
         } catch (error) {
             toastErrorNotify(error.message);
         }
-    }
-
+    };
     const getBlogPosts = async () => {
         try {
-            const res = await axios.get(`${url}blog/posts/`)
-            setPosts(res.data.results)
-            sessionStorage.setItem("posts", JSON.stringify(res.data.results))
-            // console.log(res.data.results);
+            const res = await axios.get(`${url}blog/posts/?limit=${page}&offset=0`)
+            setBlogposts(res.data.results)
         } catch (error) {
             toastErrorNotify(error.message);
         }
-    }
-
-    const createPost = async (blogData) => {
+    };
+    const getOneBlogPost = async (slug) => {
+        const token = window.atob(sessionStorage.getItem('token'));
         try {
-            const res = await axios.post(`${url}blog/posts/`, blogData)
-            if (res.status === 200) {
-                getBlogPosts()
-                toastSuccessNotify('Blog created successfully')
-            }
-        } catch (error) {
-            toastErrorNotify(error.message);
-        }
-    }
-    const updateGetPost = async (slug, token, user_id, post_id) => {
-        //? for view count increase
-        try {
-            const data = JSON.stringify({
-                "user": user_id,
-                "post": post_id
-            });
-            const config = {
+            let config = {
                 method: 'get',
                 url: `${url}blog/posts/${slug}`,
                 headers: {
                     'Authorization': `Token ${token}`,
-                    'Content-Type': 'application/json',
-                    'Cookie': 'csrftoken=hg8jtk9cKr6iaVG9AY6j7ynqx0s18Ulx; sessionid=crcnox2a76sf9d54b1bga52ksj7yxpwt'
-                },
-                // data: data
+                }
             };
-            const res = await axios(config)
-                .then(function (response) {
-                    console.log(JSON.stringify(response.data));
-                })
-                .catch(function (error) {
-                    // toastErrorNotify(error.message);
-                });
+            const result = await axios(config);
+            setBlogDetail(result.data);
+            setDeatilLoading(false);
+            console.log(result.data);
         } catch (error) {
             toastErrorNotify(error.message);
         }
-    }
-    const postLike = async (like) => {
+    };
+    const createPost = async (blogData, navigate) => {
+        const token = window.atob(sessionStorage.getItem('token'));
         try {
-            const res = await axios.post(`${url}blog/like/`, like)
-            if (res.status !== 200) {
-                console.log(res);
+            const config = {
+                method: 'post',
+                url: `${url}blog/posts/`,
+                headers: {
+                    'Authorization': `Token ${token}`,
+                },
+                data: blogData
+            };
+
+            const res = await axios(config);
+            if (res.status === 201) {
+                getBlogPosts();
+                navigate('/');
+                toastSuccessNotify('Blog created successfully');
+            }
+            // navigate('/newblog')
+        } catch (error) {
+            toastErrorNotify(error.message);
+        }
+    };
+    const updatePost = async (slug, navigate, data) => {
+        const token = window.atob(sessionStorage.getItem('token'));
+        const config = {
+            method: 'put',
+            url: `${url}blog/posts/${slug}/`,
+            headers: {
+                'Authorization': `Token ${token}`,
+            },
+            data: data
+        };
+        try {
+            const res = await axios(config)
+            if (res.status === 200) {
+                toastSuccessNotify('Congrats Blog Updated Successfuly')
+                navigate(-1)
+            }
+        } catch (error) {
+            toastErrorNotify(error.message)
+        }
+    }
+    const deletePost = async (slug, navigate) => {
+        const token = window.atob(sessionStorage.getItem('token'));
+        const config = {
+            method: 'delete',
+            url: `${url}blog/posts/${slug}/`,
+            headers: {
+                'Authorization': `Token ${token}`,
+            },
+        };
+        try {
+            const res = await axios(config)
+            if (res.status === 204) {
+                toastSuccessNotify('Deleted Successfuly')
+                navigate('/')
+            }
+        } catch (error) {
+            toastErrorNotify(error.message)
+        }
+
+    }
+    const postLike = async (user, post_id, slug) => {
+        const token = window.atob(sessionStorage.getItem('token'));
+        const data = {
+            "user_id": user,
+            "post": post_id
+        };
+        const config = {
+            method: 'post',
+            url: `${url}blog/like/`,
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+        try {
+            const res = await axios(config);
+            if (res.status === 200 || res.status === 201) {
+                getOneBlogPost(slug);
                 toastSuccessNotify('Thanks a lot')
             }
         } catch (error) {
+            console.log(error);
             toastErrorNotify(error.message);
         }
     }
-
+    const setComments = async (slug, commendData) => {
+        const token = window.atob(sessionStorage.getItem('token'));
+        const commentUrl = url + `blog/posts/${slug}/add_comment/`;
+        try {
+            const data = {
+                "content": commendData
+            };
+            var config = {
+                method: 'post',
+                url: commentUrl,
+                headers: {
+                    'Authorization': `Token ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                data: data
+            };
+            const res = await axios(config)
+            if (res.status === 200 || res.status === 201) {
+                getBlogPosts()
+            }
+        } catch (error) {
+            toastErrorNotify(error.message,)
+        }
+    }
+    const usersAllPosts = async () => {
+        const token = window.atob(sessionStorage.getItem('token'));
+        const config = {
+            method: 'get',
+            url: `${url}blog/all-posts/`,
+            headers: {
+                'Authorization': `Token ${token}`,
+                'Cookie': 'csrftoken=hg8jtk9cKr6iaVG9AY6j7ynqx0s18Ulx; sessionid=crcnox2a76sf9d54b1bga52ksj7yxpwt'
+            }
+        };
+        try {
+            const res = await axios(config)
+            setUserPosts(res.data)
+        } catch (error) {
+            toastErrorNotify(error.message)
+        }
+    }
     const value = {
-        posts,
-        setPosts,
         getCategories,
+        category,
+        loadingCategory,
+        blogPosts,
+        setBlogposts,
         getBlogPosts,
-        createPost,
+        blogDetail,
+        deatilLoading,
+        getOneBlogPost,
         postLike,
-        updateGetPost
+        setComments,
+        createPost,
+        setPage,
+        page,
+        updatePost,
+        deletePost,
+        usersAllPosts,
+        userPosts
     }
     return (
         <BlogDataContext.Provider value={value}>

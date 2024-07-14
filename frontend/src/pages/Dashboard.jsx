@@ -1,20 +1,22 @@
-import { Box, Typography } from '@mui/material';
-// import { useFetch } from '../helpers/databaseFunctions'; burda gerekli data db den çekiliyor
+import { Box, Button, Typography } from '@mui/material';
 import BlogCard from '../components/blogcard/BlogCard';
 import Loading from '../assets/loading.gif'
 import { useContext, useEffect, useState } from 'react';
 import { BlogDataContext } from '../context/BlogContext';
 
 const Dashboard = () => {
-    const { posts, getBlogPosts } = useContext(BlogDataContext)
+    const { blogPosts, getBlogPosts, setPage, page } = useContext(BlogDataContext)
     const [isLoading, setIsLoading] = useState(true)
-    // const isLoading = false
-    // const dataList = ["React"]
+
     useEffect(() => {
         getBlogPosts()
         setIsLoading(false)
-    }, [])
+    }, [page])
 
+    // const handlePage = () => {
+    //     setPage(page + 6)
+    //     getPaginationPosts()
+    // }
 
     if (isLoading) {
         return (
@@ -23,19 +25,21 @@ const Dashboard = () => {
             </div>
         )
     }
-    // console.log(posts);
-
-
+    // console.log(blogPosts)
 
     return (
-        <Box sx={{ textAlign: 'center', fontFamily: 'Girassol, cursive' }} >
-            {/* <Button onClick={() => getBlogPosts()}>Get</Button> */}
+        <Box sx={{ textAlign: 'center', fontFamily: 'Girassol, cursive', display: 'flex', flexDirection: 'column', alignContent: 'center', justifyContent: 'center' }} >
             <Typography variant='h3' sx={{ fontFamily: 'Girassol, cursive' }} >-Dashboard-</Typography>
+
             <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 4, mt: 4, textAlign: 'left' }}>
-                {posts?.map((post, index) => (
-                    <BlogCard data={post} key={index} />
+                {blogPosts?.map((post, index) => (
+                    <BlogCard blogData={post} key={index} />
                 ))}
                 {/* burda gelen data ekrana işleniyor */}
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '60%', mx: 'auto', my: 5 }}>
+                <Button onClick={() => setPage(page > 6 ? (page - 6) : (page))} variant="contained" color="secondary" startIcon={null}>View Less</Button>
+                <Button onClick={() => setPage(page + 6)} variant="contained" color="warning" startIcon={null}>View More</Button>
             </Box>
         </Box >
     );

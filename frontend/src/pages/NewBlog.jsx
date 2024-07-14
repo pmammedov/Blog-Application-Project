@@ -1,25 +1,32 @@
 import { Grid } from '@mui/material'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BlogForm from '../components/blogform/BlogForm'
 import { AuthContextProv } from '../context/AuthContext'
 import { BlogDataContext } from '../context/BlogContext'
 
 const NewBlog = () => {
+    const [createBlog, setCreateBlog] = useState("")
     const { currentUser } = useContext(AuthContextProv)
-    const { posts, setPosts, createPost } = useContext(BlogDataContext)
+    const { createPost, getCategories } = useContext(BlogDataContext)
     const navigate = useNavigate()
-
+    const submitButtonInnerContent = 'Add New Blog Post';
     const handleChange = (e) => {
-        e.preventDefault()
+        // e.preventDefault()
         const { name, value } = e.target
-        setPosts({ [name]: value })
+        setCreateBlog({ ...createBlog, [name]: value })
+        console.log(name, value)
     }
-    const handleSubmt = (e) => {
-        e.preventDefault()
-
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createPost(createBlog, navigate)
+        console.log(createBlog);
+        setCreateBlog("")
     }
+    console.log(createBlog);
+    useEffect(() => {
+        getCategories()
+    }, [])
 
     return (
         <Grid container
@@ -27,10 +34,10 @@ const NewBlog = () => {
             direction="column"
             alignItems="center"
             justify="center"
-            style={{ minHeight: '100vh', marginTop: '10px' }}
+            style={{ maxHeight: '100vh', marginTop: '10px' }}
         >
-            <Grid item width={'50%'}>
-                <BlogForm handleChange={handleChange} handleSubmt={handleSubmt} posts={posts} />
+            <Grid item width={'30%'}>
+                <BlogForm handleChange={handleChange} handleSubmit={handleSubmit} posts={createBlog} buttonInnerText={submitButtonInnerContent} />
             </Grid>
         </Grid>
     )
