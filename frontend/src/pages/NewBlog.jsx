@@ -1,4 +1,5 @@
 import { Grid } from '@mui/material'
+import { blueGrey } from '@mui/material/colors'
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import BlogForm from '../components/blogform/BlogForm'
@@ -34,9 +35,9 @@ const NewBlog = () => {
             direction="column"
             alignItems="center"
             justify="center"
-            style={{ maxHeight: '100vh', marginTop: '10px' }}
+            style={{ maxHeight: '100vh', marginTop: '70px', padding: '2rem' }}
         >
-            <Grid item width={'30%'}>
+            <Grid item width={'45%'}>
                 <BlogForm handleChange={handleChange} handleSubmit={handleSubmit} posts={createBlog} buttonInnerText={submitButtonInnerContent} />
             </Grid>
         </Grid>
