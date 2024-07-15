@@ -56,13 +56,13 @@ const BlogDetails = () => {
 
     if (deatilLoading) {
         return (
-            <div style={{ backgroundColor: 'black', height: '93.35vh', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+            <div style={{ backgroundColor: 'black', height: '100vh', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                 <img src={Loading} alt="Loading..." width={'800'} />
             </div>
         )
     }
     return (
-        <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', gap: 5 }} sx={{ maxWidth: { xs: "100%", sm: "80%", md: "60%" }, marginX: "auto", marginY: 2 }}>
+        <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', gap: 5 }} sx={{ maxWidth: { xs: "100%", sm: "80%", md: "60%" }, marginX: "auto", marginY: 10 }}>
             <Card>
                 <Box>
                     <CardMedia
@@ -76,6 +76,7 @@ const BlogDetails = () => {
                         <Typography
                             variant="body2"
                             color="text.secondary"
+                            sx={{ overflow: 'auto' }}
                         >
                             {blogDetail.content}
                         </Typography>
@@ -126,7 +127,7 @@ const BlogDetails = () => {
                 </Box>
             }
             <Box>
-                <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', marginTop: 3 }}>
+                <List sx={{ width: '100%', marginTop: 3, borderRadius: 3 }}>
                     {blogDetail.post_comment.map((comment) => (
                         <>
                             <ListItem alignItems="flex-start">
