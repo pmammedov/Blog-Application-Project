@@ -3,6 +3,7 @@ import BlogCard from '../components/blogcard/BlogCard';
 import Loading from '../assets/loading.gif'
 import { useContext, useEffect, useState } from 'react';
 import { BlogDataContext } from '../context/BlogContext';
+import { blueGrey } from '@mui/material/colors'
 
 const Dashboard = () => {
     const { blogPosts, getBlogPosts, setPage, page } = useContext(BlogDataContext)
@@ -13,14 +14,9 @@ const Dashboard = () => {
         setIsLoading(false)
     }, [page])
 
-    // const handlePage = () => {
-    //     setPage(page + 6)
-    //     getPaginationPosts()
-    // }
-
     if (isLoading) {
         return (
-            <div style={{ backgroundColor: 'black', height: '93.35vh', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+            <div style={{ backgroundColor: 'black', height: '100vh', display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                 <img src={Loading} alt="Loading..." width={'800'} />
             </div>
         )
@@ -28,20 +24,20 @@ const Dashboard = () => {
     // console.log(blogPosts)
 
     return (
-        <Box sx={{ textAlign: 'center', fontFamily: 'Girassol, cursive', display: 'flex', flexDirection: 'column', alignContent: 'center', justifyContent: 'center' }} >
-            <Typography variant='h3' sx={{ fontFamily: 'Girassol, cursive' }} >-Dashboard-</Typography>
+        <>
+            <Typography variant='h3' sx={{ fontFamily: 'Girassol, cursive', textAlign: 'center' }} >-Dashboard-</Typography>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 4, mt: 4, textAlign: 'left' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2, marginY: '1rem' }}>
                 {blogPosts?.map((post, index) => (
                     <BlogCard blogData={post} key={index} />
                 ))}
                 {/* burda gelen data ekrana işleniyor */}
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '60%', mx: 'auto', my: 5 }}>
-                <Button onClick={() => setPage(page > 6 ? (page - 6) : (page))} variant="contained" color="secondary" startIcon={null}>View Less</Button>
-                <Button onClick={() => setPage(page + 6)} variant="contained" color="warning" startIcon={null}>View More</Button>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '60%', margin: '2rem auto' }}>
+                <Button onClick={() => setPage(page > 6 ? (page - 6) : (page))} variant="outlined" color="secondary" startIcon={null}>View Less</Button>
+                <Button onClick={() => setPage(page + 6)} variant="outlined" color="warning" startIcon={null}>View More</Button>
             </Box>
-        </Box >
+        </>
     );
 }
 export default Dashboard
