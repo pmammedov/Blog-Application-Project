@@ -14,12 +14,12 @@ const Login = () => {
     const navigate = useNavigate()
     const { signIn } = useContext(AuthContextProv)
     return (
-        <Grid container width={'100%'} height={'100vh'}>
+        <Grid container width={'100%'} height={'100vh'} >
             <Grid item xs={0} md={8} style={{ background: "url('https://picsum.photos/800/1200') no-repeat center", backgroundSize: "100%" }}>
             </Grid>
             <Grid item xs={12} md={4} sx={{ backgroundColor: 'whitesmoke', padding: '2rem' }}>
                 <Box style={{ textAlign: 'center', mb: 2 }}>
-                    <img className='blogimg' src={Eagle} alt="Eagle" />
+                    <img className='blogimg' src={Eagle} alt="SERPERISC" />
                     <h3>- Login -</h3>
                 </Box>
                 <Formik

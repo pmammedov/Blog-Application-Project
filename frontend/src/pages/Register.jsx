@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContextProv } from '../context/AuthContext';
 import { useContext } from 'react';
 // import { toastSuccessNotify } from '../helper/helper';
-// import Eagle from '../assets/kartal_transparent.png';
+import Eagle from '../assets/kartal_transparent.png';
 
 const Register = () => {
     const navigate = useNavigate()
@@ -23,7 +23,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12} md={4} sx={{ backgroundColor: 'whitesmoke', padding: '2rem' }}>
                 <Box style={{ textAlign: 'center', mb: 2 }}>
-                    {/* <img className='blogimg' src={Eagle} alt="Eagle" width={150} /> */}
+                    <img className='blogimg' src={Eagle} alt="SERPERISC" width={150} />
                     <h2>- Register -</h2>
                 </Box>
                 <Formik
@@ -34,8 +34,14 @@ const Register = () => {
                         lastName: Yup.string().max(25, 'You must enter a maximum of 25 characters').required('Last Name information must be filled'),
                         email: Yup.string().email('Please enter a valid e-mail address').required('e-mail information must be filled').matches(/([\w._%+-]+@[\w.-]+\.[a-zA-Z]{0,4})/, 'Such as : asdf@dfgv.com'),
                         profile_pic: Yup.string().url('Please enter a valid url address').required('profile picture information must be filled'),
-                        password: Yup.string().min(8).max(16).required('Password information must be filled').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"),
-                        password1: Yup.string().min(8).max(16).required('Password information must be filled').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+                        password: Yup.string()
+                            .min(8, 'Password must be at least 8 characters')
+                            .max(16, 'Password must be at most 16 characters')
+                            .required('Password information must be filled'),
+                        password1: Yup.string()
+                            .min(8, 'Password must be at least 8 characters')
+                            .max(16, 'Password must be at most 16 characters')
+                            .required('Password information must be filled')
                     })
                     }
                     onSubmit={(values, action) => {

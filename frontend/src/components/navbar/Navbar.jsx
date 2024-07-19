@@ -47,10 +47,10 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static" color='success'>
+        <AppBar position="static" color='warning'>
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <img src={Eagle} alt="Eagle" width={30} sx={{ display: { xs: 'none', md: 'flex' }, marginRight: 5 }} />
+                    <img src={Eagle} alt="SERPERISC" width={30} sx={{ display: { xs: 'none', md: 'flex' }, marginRight: 5 }} />
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -68,7 +68,7 @@ const Navbar = () => {
                         }}
                     // onClick={() => navigate('/')}
                     >
-                        Eagle Blog
+                        SERPERISC Blog
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -123,7 +123,7 @@ const Navbar = () => {
                             cursor: 'pointer'
                         }}
                     >
-                        Eagle Blog
+                        SERPERISC Blog
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Button
