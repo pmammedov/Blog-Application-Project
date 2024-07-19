@@ -15,7 +15,10 @@ import PrivateRouter from './PrivateRouter';
 
 const AppRouter = () => {
     return (
+
+
         <BrowserRouter>
+
             <Navbar />
             <Routes>
                 <Route path='/' element={<Dashboard />} />
@@ -40,7 +43,10 @@ const AppRouter = () => {
                 </Route>
             </Routes>
             <Footer />
+
+
         </BrowserRouter>
+
     )
 }
 

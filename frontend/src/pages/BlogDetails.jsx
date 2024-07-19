@@ -63,7 +63,7 @@ const BlogDetails = () => {
     }
     return (
         <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', gap: 5 }} sx={{ maxWidth: { xs: "100%", sm: "80%", md: "60%" }, marginX: "auto", marginY: 10 }}>
-            <Card>
+            {/*    <Card>
                 <Box>
                     <CardMedia
                         component="img"
@@ -117,7 +117,58 @@ const BlogDetails = () => {
                     </CardActions>
 
                 </Box>
-            </Card>
+            </Card> */}
+            <Card sx={{ bgcolor: "#81abc2" }} >
+
+
+                <CardMedia
+                    component="img"
+                    height="300"
+                    image={blogDetail.image}
+                    alt={blogDetail.title}
+                />
+
+                <CardContent>
+                    <Typography variant='h6'>{blogDetail.title}</Typography>
+                    <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        sx={{ overflow: 'auto' }}
+                    >
+                        {blogDetail.content}
+                    </Typography>
+                </CardContent>
+                <CardHeader
+                    avatar={
+                        <Avatar sx={{ bgcolor: green[500] }} aria-label="blog">
+                            {((blogDetail.author).slice(0, 1)).toUpperCase()}
+                        </Avatar>
+                    }
+                    title={blogDetail.author.toUpperCase()}
+                    subheader={(new Date(blogDetail.published_date).toUTCString()).slice(0, 16)}
+                />
+
+                <CardActions disableSpacing>
+                    <IconButton aria-label="like" onClick={() => handleLike(currentUser.id, blogDetail.id)} sx={{ color: (blogDetail.post_like?.filter((like) => like.user_id === currentUser.id)[0]?.user_id) && "red" }}>
+                        <FavoriteIcon />
+                        <Typography sx={{ ml: 1 }}>
+                            {blogDetail.like_count}
+                        </Typography>
+                    </IconButton>
+                    <IconButton aria-label="view">
+                        <VisibilityTwoToneIcon />
+                        <Typography sx={{ ml: 1 }}>
+                            {blogDetail.post_view_count}
+                        </Typography>
+                    </IconButton>
+                    <IconButton aria-label="comment">
+                        <ChatBubbleOutlineOutlinedIcon />
+                        <Typography sx={{ ml: 1 }}>
+                            {blogDetail.comment_count}
+                        </Typography>
+                    </IconButton>
+                </CardActions>
+            </Card >
             {
                 blogDetail.author_id === currentUser.id
                 &&

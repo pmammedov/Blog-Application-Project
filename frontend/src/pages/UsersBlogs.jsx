@@ -12,7 +12,13 @@ const UsersBlogs = () => {
     }, [])
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 4, marginY: 10, padding: 2, textAlign: 'left', height: '100vh' }}>
+    //     <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 2, marginY: '1rem' }}>
+    //     {blogPosts?.map((post, index) => (
+    //         <BlogCard blogData={post} key={index} />
+    //     ))}
+    //     {/* burda gelen data ekrana işleniyor */}
+    // </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 4, marginY: 10, padding: 2, textAlign: 'left' }}>
             {userPosts?.map((post, index) => (
                 <BlogCard blogData={post} key={index} />
             ))}

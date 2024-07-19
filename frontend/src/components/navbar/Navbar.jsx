@@ -50,7 +50,7 @@ const Navbar = () => {
         <AppBar position="static" color='warning'>
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <img src={Eagle} alt="SERPERISC" width={30} sx={{ display: { xs: 'none', md: 'flex' }, marginRight: 5 }} />
+                    <img src={Eagle} alt="SERPERISC" width={30} sx={{ display: { xs: 'none', md: 'flex' }}} />
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -64,7 +64,8 @@ const Navbar = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            cursor: 'pointer'
+                            cursor: 'pointer',
+                            marginLeft:2
                         }}
                     // onClick={() => navigate('/')}
                     >

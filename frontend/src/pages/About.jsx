@@ -30,8 +30,8 @@ const About = () => {
           />
         </Box>
       </Box>
-      <Box>
-        <Typography>
+      <Box maxWidth={700}>
+        <Typography color={'white'} fontSize={25}>
           I interested in writing codes, skilled at developing complex solutions, creating responsive designs, possessing strong creative thinking skills, high energy and integrity. Ability to create algorithms effectively, and interact positively and communicate appropriately with team members, leading with team where it necessary. Quickly grasp new technologies and concepts to develop innovative and creative solutions to problems. Every time eager to learn various technologies, tools and libraries. Especially interested in the Fullstack Development, HTML, CSS, JS, React, Python. Excited to learn new things and improve, lifetime student.
         </Typography>
       </Box>
