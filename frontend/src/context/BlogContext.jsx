@@ -5,7 +5,7 @@ import { toastErrorNotify, toastSuccessNotify } from '../helper/helper';
 
 
 export const BlogDataContext = createContext()
-const url = "http://mammedovblog.pythonanywhere.com/";
+const url = "https://mammedovblog.pythonanywhere.com/";
 
 const BlogContext = ({ children }) => {
     const [blogPosts, setBlogposts] = useState([]);  //* for home  page

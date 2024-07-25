@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useState } from 'react'
 import { toastErrorNotify, toastSuccessNotify } from '../helper/helper';
-const url = 'http://mammedovblog.pythonanywhere.com/';
+const url = 'https://mammedovblog.pythonanywhere.com/';
 
 export const AuthContextProv = createContext();
 
