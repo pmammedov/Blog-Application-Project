@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useState } from 'react'
 import { toastErrorNotify, toastSuccessNotify } from '../helper/helper';
-const url = 'http://127.0.0.1:8000/';
+const url = 'http://mammedovblog.pythonanywhere.com/';
 
 export const AuthContextProv = createContext();
 
@@ -37,7 +37,7 @@ const AuthContext = ({ children }) => {
 
     const signIn = async (userLoginInfo, navigate) => {
         try {
-            const res = await axios.post(`http://127.0.0.1:8000/auth/login/`, userLoginInfo)
+            const res = await axios.post(`${url}auth/login/`, userLoginInfo)
             if (res.data.key) {
                 setMyToken(res.data.key)
                 setCurrentUser(res.data.user)
