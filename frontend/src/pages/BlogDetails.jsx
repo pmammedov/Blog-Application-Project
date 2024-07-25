@@ -45,7 +45,7 @@ const BlogDetails = () => {
         e.preventDefault();
         setComments(slug, comment);
         setComment("");
-        setRender(1)
+        setRender(render + 1)
     }
 
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import TextField from '@mui/material/TextField';
-import { Button, FormControl, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { BlogDataContext } from '../../context/BlogContext';
 
 const BlogForm = ({ handleChange, handleSubmit, posts, buttonInnerText }) => {
@@ -13,7 +13,8 @@ const BlogForm = ({ handleChange, handleSubmit, posts, buttonInnerText }) => {
     }
     return (
         <form onSubmit={(e) => handleSubmit(e)} >
-            <Stack spacing={3} direction='column' >
+            <Stack spacing={3} direction='column' width={"100%"} >
+                <Typography variant="h3" textAlign={'center'} color="initial">- Update The Blog - </Typography>
                 <TextField
                     label='Title'
                     type='text'

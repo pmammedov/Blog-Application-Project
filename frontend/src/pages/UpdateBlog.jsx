@@ -30,16 +30,8 @@ const UpdateBlog = () => {
         getCategories()
     }, [])
     return (
-        <Grid container
-            spacing={0}
-            direction="column"
-            alignItems="center"
-            justify="center"
-            style={{ maxHeight: '100vh', margin: '16px' }}
-        >
-            <Grid item width={'45%'}>
-                <BlogForm handleChange={handleChange} handleSubmit={handleSubmit} posts={updateBlog} buttonInnerText={submitButtonInnerContent} />
-            </Grid>
+        <Grid width={'100%'} marginTop={20} spacing={0} justifyContent={'center'} alignItems={'center'} minHeight={'calc(100vh - 600px)'} sx={{ paddingX: { xs: 2, sm: 10 } }}>
+            <BlogForm handleChange={handleChange} handleSubmit={handleSubmit} posts={updateBlog} buttonInnerText={submitButtonInnerContent} />
         </Grid>
     )
 }

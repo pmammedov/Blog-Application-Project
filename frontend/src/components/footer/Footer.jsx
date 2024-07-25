@@ -75,7 +75,7 @@ const Footer = () => {
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexShrink: 0}}>
             <AppBar position="static" color='warning'>
                 <Toolbar>
                     <Typography

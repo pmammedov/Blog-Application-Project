@@ -97,3 +97,17 @@ class UpdateUserSerializer(serializers.ModelSerializer):
             "profile_pic",
             "biography",
         )
+
+class LoginSerializer(serializers.ModelSerializer):
+    
+    username = serializers.CharField(required=False)
+    email = serializers.EmailField(required=False)
+    password = serializers.CharField(write_only=True, required=True)
+    
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "email",
+            "password"
+        )

@@ -50,7 +50,7 @@ const Navbar = () => {
         <AppBar position="static" color='warning'>
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <img src={Eagle} alt="SERPERISC" width={30} sx={{ display: { xs: 'none', md: 'flex' }}} />
+                    <img src={Eagle} alt="SERPERISC" width={60} sx={{ display: { xs: 'none', md: 'flex' }}} />
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -69,7 +69,7 @@ const Navbar = () => {
                         }}
                     // onClick={() => navigate('/')}
                     >
-                        SERPERISC Blog
+                        SerperiscBlog
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

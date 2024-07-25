@@ -27,7 +27,10 @@ const Login = () => {
                     validationSchema={Yup.object().shape({
                         username: Yup.string().max(25, 'You must enter a maximum of 25 characters').required('User Name information must be filled'),
                         email: Yup.string().email('Please enter a valid e-mail address').required('e-mail information must be filled').matches(/([\w._%+-]+@[\w.-]+\.[a-zA-Z]{0,4})/, 'Such as : asdf@dfgv.com'),
-                        password: Yup.string().min(8).max(16).required('Password information must be filled').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/, "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+                        password: Yup.string()
+                            .min(8, 'Password must be at least 8 characters')
+                            .max(16, 'Password must be at most 16 characters')
+                            .required('Password information must be filled')
                     })
                     }
                     onSubmit={(values, action) => {

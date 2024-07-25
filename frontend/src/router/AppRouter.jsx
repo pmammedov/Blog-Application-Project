@@ -12,40 +12,44 @@ import Register from '../pages/Register';
 import UpdateBlog from '../pages/UpdateBlog';
 import UsersBlogs from '../pages/UsersBlogs';
 import PrivateRouter from './PrivateRouter';
+import { Box } from '@mui/material';
 
 const AppRouter = () => {
     return (
 
-
         <BrowserRouter>
+                <Navbar />
+            <Box sx={{ flex: '1 0 auto'}}>
 
-            <Navbar />
-            <Routes>
-                <Route path='/' element={<Dashboard />} />
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path='/about' element={<About />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/newblog' element={<PrivateRouter />}>
-                    <Route path='' element={<NewBlog />} />
-                </Route>
-                <Route path='/myblogs' element={<PrivateRouter />}>
-                    <Route path='' element={<UsersBlogs />} />
-                </Route>
-                <Route path='/details/:str' element={<PrivateRouter />}>
-                    <Route path='' element={<BlogDetails />} />
-                </Route>
-                <Route path='/update/:str' element={<PrivateRouter />}>
-                    <Route path='' element={<UpdateBlog />} />
-                </Route>
-                <Route path='/profile' element={<PrivateRouter />}>
-                    <Route path='' element={<Profile />} />
-                </Route>
-            </Routes>
+                <Routes>
+                    <Route path='/' element={<Dashboard />} />
+                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route path='/about' element={<About />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/newblog' element={<PrivateRouter />}>
+                        <Route path='' element={<NewBlog />} />
+                    </Route>
+                    <Route path='/myblogs' element={<PrivateRouter />}>
+                        <Route path='' element={<UsersBlogs />} />
+                    </Route>
+                    <Route path='/details/:str' element={<PrivateRouter />}>
+                        <Route path='' element={<BlogDetails />} />
+                    </Route>
+                    <Route path='/update/:str' element={<PrivateRouter />}>
+                        <Route path='' element={<UpdateBlog />} />
+                    </Route>
+                    <Route path='/profile' element={<PrivateRouter />}>
+                        <Route path='' element={<Profile />} />
+                    </Route>
+                </Routes>
+            </Box>
+
             <Footer />
 
 
         </BrowserRouter>
+
 
     )
 }

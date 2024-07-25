@@ -10,6 +10,15 @@ body {
   background-color:#F4F4F4;
 }
 
+
+#root{
+  /* background-color: aqua; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; 
+
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas,'Noto Serif', 'Courier New',
     monospace;

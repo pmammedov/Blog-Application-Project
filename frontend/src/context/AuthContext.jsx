@@ -14,6 +14,8 @@ const AuthContext = ({ children }) => {
     const createUser = async (userInfo, navigate) => {
         try {
             const res = await axios.post(`${url}auth/register/`, userInfo)
+            console.log(res);
+
             if (res.data.token) {
                 setMyToken(res.data.token)
                 const userData = { ...res.data, token: '' }
@@ -25,13 +27,17 @@ const AuthContext = ({ children }) => {
                 navigate('/')
             }
         } catch (error) {
-            toastErrorNotify(error.message);
+            const errorString = Object.entries(error?.response?.data)
+                .map(([key, value]) => `${key}: ${value[0]}`)
+                .join(' ');
+
+            toastErrorNotify(errorString);
         }
     }
 
     const signIn = async (userLoginInfo, navigate) => {
         try {
-            const res = await axios.post(`${url}auth/login/`, userLoginInfo)
+            const res = await axios.post(`http://127.0.0.1:8000/auth/login/`, userLoginInfo)
             if (res.data.key) {
                 setMyToken(res.data.key)
                 setCurrentUser(res.data.user)
@@ -43,7 +49,7 @@ const AuthContext = ({ children }) => {
             }
 
         } catch (error) {
-            toastErrorNotify(error.message);
+            toastErrorNotify(error?.response?.data?.error);
         }
     }
     const updateUser = async (updateInfo, id, navigate) => {

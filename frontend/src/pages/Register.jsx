@@ -23,7 +23,7 @@ const Register = () => {
             </Grid>
             <Grid item xs={12} md={4} sx={{ backgroundColor: 'whitesmoke', padding: '2rem' }}>
                 <Box style={{ textAlign: 'center', mb: 2 }}>
-                    <img className='blogimg' src={Eagle} alt="SERPERISC" width={150} />
+                    <img className='blogimg' src={Eagle} alt="SERPERISC" />
                     <h2>- Register -</h2>
                 </Box>
                 <Formik
