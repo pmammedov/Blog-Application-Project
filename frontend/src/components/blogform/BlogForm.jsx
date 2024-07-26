@@ -14,7 +14,7 @@ const BlogForm = ({ handleChange, handleSubmit, posts, buttonInnerText }) => {
     return (
         <form onSubmit={(e) => handleSubmit(e)} >
             <Stack spacing={3} direction='column' width={"100%"} >
-                <Typography variant="h3" textAlign={'center'} color="initial">- Update The Blog - </Typography>
+                <Typography variant="h4" textAlign={'center'} color="initial">- Update The Blog - </Typography>
                 <TextField
                     label='Title'
                     type='text'

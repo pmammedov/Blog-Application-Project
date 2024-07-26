@@ -50,7 +50,9 @@ const Navbar = () => {
         <AppBar position="static" color='warning'>
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <img src={Eagle} alt="SERPERISC" width={60} sx={{ display: { xs: 'none', md: 'flex' }}} />
+                    <img src={Eagle} alt="SERPERISC" width={60} sx={{ display: { xs: 'none', md: 'flex' } }}
+                        onClick={() => navigate('/')}
+                    />
                     {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Typography
                         variant="h6"
@@ -65,9 +67,8 @@ const Navbar = () => {
                             color: 'inherit',
                             textDecoration: 'none',
                             cursor: 'pointer',
-                            marginLeft:2
+                            marginLeft: 2
                         }}
-                    // onClick={() => navigate('/')}
                     >
                         SerperiscBlog
                     </Typography>
@@ -110,16 +111,15 @@ const Navbar = () => {
                     </Box>
                     {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
                     <Typography
-                        variant="h5"
+                        variant="h6"
                         noWrap
                         onClick={() => navigate('/')}
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
                             fontFamily: 'Noto Serif',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            letterSpacing: '.1rem',
                             color: 'inherit',
                             cursor: 'pointer'
                         }}

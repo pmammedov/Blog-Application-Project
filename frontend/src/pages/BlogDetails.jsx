@@ -62,7 +62,7 @@ const BlogDetails = () => {
         )
     }
     return (
-        <Box style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', gap: 5 }} sx={{ maxWidth: { xs: "100%", sm: "80%", md: "60%" }, marginX: "auto", marginY: 10 }}>
+        <Box style={{ padding: { xs: '20px', lg: 0 }, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center', gap: 5 }} sx={{ maxWidth: { xs: "100%", sm: "80%", md: "60%" }, marginX: "auto", }}>
             {/*    <Card>
                 <Box>
                     <CardMedia
@@ -119,8 +119,6 @@ const BlogDetails = () => {
                 </Box>
             </Card> */}
             <Card sx={{ bgcolor: "#81abc2" }} >
-
-
                 <CardMedia
                     component="img"
                     height="300"
@@ -172,8 +170,10 @@ const BlogDetails = () => {
             {
                 blogDetail.author_id === currentUser.id
                 &&
-                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', my: 3 }}>
-                    <Button variant="contained" color="success" size="medium" startIcon={<UpgradeIcon />} onClick={() => navigate(`/update/${blogDetail.slug}`, { state: { blogDetail } })}>Update This Blog</Button>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-evenly', gap: 2, my: 3 }}>
+                    <Button variant="contained" color="success" size="medium" startIcon={<UpgradeIcon />} onClick={() => navigate(`/update/${blogDetail.slug}`, { state: { blogDetail } })}>
+                        Update This Blog
+                    </Button>
                     <Button variant="contained" color="error" size="medium" startIcon={<DeleteForeverIcon />} onClick={() => deletePost(blogDetail.slug, navigate)} >Delete This Blog</Button>
                 </Box>
             }

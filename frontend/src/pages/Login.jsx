@@ -19,7 +19,9 @@ const Login = () => {
             </Grid>
             <Grid item xs={12} md={4} sx={{ backgroundColor: 'whitesmoke', padding: '2rem' }}>
                 <Box style={{ textAlign: 'center', mb: 2 }}>
-                    <img className='blogimg' src={Eagle} alt="SERPERISC" />
+                    <Box sx={{ width: { xs: '200', lg: '400' } }} marginX={'auto'}>
+                        <img className='blogimg' width={"100%"} src={Eagle} alt="SERPERISC" />
+                    </Box>
                     <h3>- Login -</h3>
                 </Box>
                 <Formik

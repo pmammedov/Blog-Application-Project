@@ -30,14 +30,15 @@ const NewBlog = () => {
     }, [])
 
     return (
-        <Grid container
+        <Grid 
+            container
             spacing={0}
             direction="column"
             alignItems="center"
             justify="center"
             style={{ maxHeight: '100vh', marginTop: '70px', padding: '2rem' }}
         >
-            <Grid item width={'45%'}>
+            <Grid item  sx={{width:{xs:'100%', lg:'80%'}}}>
                 <BlogForm handleChange={handleChange} handleSubmit={handleSubmit} posts={createBlog} buttonInnerText={submitButtonInnerContent} />
             </Grid>
         </Grid>
