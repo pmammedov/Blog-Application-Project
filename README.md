@@ -57,5 +57,6 @@
     <p>With both the backend and frontend servers running, you can access the application by navigating to <code>http://localhost:3000</code> in your web browser.</p>
     <h2>Contact</h2>
     <p>If you have any questions or feedback, please contact me at <a href="mailto:pmammedov@gmail.com">pmammedov@gmail.com</a>.</p>
+    <p>Project <a href="https://github.com/users/pmammedov/projects/2">Kanban</a>.</p>
     <p>Thank you for visiting! If you find this project helpful, please give it a star 🌟.</p>
 </body>
