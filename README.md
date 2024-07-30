@@ -3,6 +3,11 @@
     <p>The Blog Application Project is a full-stack web application with a backend developed using Django and a frontend developed using React. The application allows users to manage blog posts, comments, and likes. This project is designed to be used as a complete application with both frontend and backend components.</p>
      <p>Project <a href="https://github.com/users/pmammedov/projects/2">Kanban</a></p>
      <p>Live <a href="https://blog-application-project.vercel.app">Link</a></p>
+     
+     <p>Credentials</p>
+     <p>username : admin</p>
+     <p>email : admin@gmail.com</p>
+     <p>pass : admin123</p>
     
 ![Screenshot 2024-07-26 173244](https://github.com/user-attachments/assets/9295a898-ecee-4bdf-834e-81e3b699975c)
     <h2>Features</h2>
