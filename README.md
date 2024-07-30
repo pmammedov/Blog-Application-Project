@@ -4,10 +4,10 @@
      <p>Project <a href="https://github.com/users/pmammedov/projects/2">Kanban</a></p>
      <p>Live <a href="https://blog-application-project.vercel.app">Link</a></p>
      
-     <p>Credentials</p>
-     <p>username : admin</p>
-     <p>email : admin@gmail.com</p>
-     <p>pass : admin123</p>
+     Credentials
+     username : admin
+     email : admin@gmail.com
+     pass : admin123
     
 ![Screenshot 2024-07-26 173244](https://github.com/user-attachments/assets/9295a898-ecee-4bdf-834e-81e3b699975c)
     <h2>Features</h2>
